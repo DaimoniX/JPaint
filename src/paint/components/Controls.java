@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,8 +23,9 @@ public class Controls extends JPanel {
         fileChooser.setFileFilter(filter);
 
         setBackground(Color.DARK_GRAY);
-        var s = new JButton("save");
-        s.addActionListener(e -> {
+        var saveButton = new PaintIconButton(new ImageIcon("resources/icons/save.png"));
+        var loadButton = new PaintIconButton(new ImageIcon("resources/icons/load.png"));
+        saveButton.addActionListener(e -> {
             try {
                 if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(null)) {
                     save(fileChooser.getSelectedFile().getName());
@@ -33,9 +34,7 @@ public class Controls extends JPanel {
                 e1.printStackTrace();
             }
         });
-        add(s);
-        var l = new JButton("load");
-        l.addActionListener(e -> {
+        loadButton.addActionListener(e -> {
             try {
                 if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(null)) {
                     load(fileChooser.getSelectedFile().getPath());
@@ -44,7 +43,8 @@ public class Controls extends JPanel {
                 e1.printStackTrace();
             }
         });
-        add(l);
+        add(saveButton);
+        add(loadButton);
     }
 
     public void load(String path) throws IOException {

@@ -11,7 +11,7 @@ import paint.components.Toolbar;
 import java.awt.*;
 
 public class JPaint extends JFrame {
-    private static final String VERSION = "0.01";
+    private static final String VERSION = "0.01A";
     
     public JPaint() {
         super();

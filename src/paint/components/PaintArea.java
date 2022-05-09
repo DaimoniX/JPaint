@@ -61,6 +61,8 @@ public class PaintArea extends JPanel {
     private Graphics2D imageGraphics;
     private Color backgroundColor;
     private boolean isActive;
+    private static final BasicStroke DEFAULT_STROKE = new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+    private BasicStroke stroke;
 
     private Brush brush;
     private Dimension preferredSize;
@@ -74,9 +76,10 @@ public class PaintArea extends JPanel {
 
     public PaintArea() {
         setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        stroke = DEFAULT_STROKE;
+        brush = DEFAULT_BRUSH;
         initImage(new BufferedImage(512, 512, BufferedImage.TYPE_INT_RGB));
         clear();
-        brush = DEFAULT_BRUSH;
         isActive = false;
         backgroundColor = Color.WHITE;
         var mouseController = new MouseController();
@@ -106,12 +109,31 @@ public class PaintArea extends JPanel {
         initImage(image);
         repaint();
     }
+
+    public void setStroke(BasicStroke stroke) {
+        this.stroke = stroke;
+        imageGraphics.setStroke(stroke);
+    }
+
+    public float getStrokeWidth() {
+        return stroke.getLineWidth();
+    }
+
+    public void setStrokeWidth(float value) {
+        if(value < 0)
+            return;
+        setStroke(new BasicStroke(stroke.getLineWidth(), stroke.getEndCap(), stroke.getLineJoin(), stroke.getMiterLimit(), stroke.getDashArray(), stroke.getDashPhase()));
+    }
+
+    public void resetStroke() {
+        setStroke(DEFAULT_STROKE);
+    }
     
     private void initImage(BufferedImage image) {
         this.image = image;
         imageGraphics = (Graphics2D) image.getGraphics();
         imageGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        imageGraphics.setStroke(new BasicStroke(6));
+        setStroke(stroke);
         preferredSize = new Dimension(image.getWidth(), image.getHeight());
     }
 
