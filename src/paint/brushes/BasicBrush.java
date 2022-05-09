@@ -30,6 +30,5 @@ public class BasicBrush extends Brush {
     public void onMouseRelease(MouseEvent e, Graphics2D g) {
         g.setColor(getColor());
         g.drawLine(lastPoint.x, lastPoint.y, e.getX(), e.getY());
-        lastPoint = null;
     }
 }
