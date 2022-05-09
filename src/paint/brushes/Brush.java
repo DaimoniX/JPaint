@@ -13,7 +13,7 @@ public abstract class Brush {
     public abstract void onMousePress(MouseEvent e, Graphics2D g);
 
     public abstract void onMouseDrag(MouseEvent e, Graphics2D g);
-    
+
     public abstract void onMouseRelease(MouseEvent e, Graphics2D g);
 
     public Color getColor() {

@@ -4,4 +4,4 @@
 Current features:
 - Save/Load
 - Basic tools
-- Limited coloring
+- Color picker

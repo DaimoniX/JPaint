@@ -90,7 +90,7 @@ public class PaintArea extends JPanel {
     public void setBrush(Brush brush) {
         this.brush = brush;
     }
-    
+
     public void setColor(Color color) {
         brush.setColor(color);
     }
@@ -98,13 +98,13 @@ public class PaintArea extends JPanel {
     public BufferedImage getImage() {
         return image;
     }
-    
+
     public void clear() {
         imageGraphics.setColor(backgroundColor);
         imageGraphics.fillRect(0, 0, image.getWidth(), image.getHeight());
         repaint();
     }
-    
+
     public void loadImage(BufferedImage image) {
         initImage(image);
         repaint();
@@ -120,15 +120,16 @@ public class PaintArea extends JPanel {
     }
 
     public void setStrokeWidth(float value) {
-        if(value < 0)
+        if (value < 0)
             return;
-        setStroke(new BasicStroke(stroke.getLineWidth(), stroke.getEndCap(), stroke.getLineJoin(), stroke.getMiterLimit(), stroke.getDashArray(), stroke.getDashPhase()));
+        setStroke(new BasicStroke(stroke.getLineWidth(), stroke.getEndCap(), stroke.getLineJoin(),
+                stroke.getMiterLimit(), stroke.getDashArray(), stroke.getDashPhase()));
     }
 
     public void resetStroke() {
         setStroke(DEFAULT_STROKE);
     }
-    
+
     private void initImage(BufferedImage image) {
         this.image = image;
         imageGraphics = (Graphics2D) image.getGraphics();
@@ -140,12 +141,12 @@ public class PaintArea extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-        if(brush instanceof GhostBrush b && b.ghostExists()) {
+        if (brush instanceof GhostBrush b && b.ghostExists()) {
             var g2 = (Graphics2D) g;
             g2.setColor(Constants.GHOST_COLOR);
             g2.draw(b.getGhost());
         }
         Toolkit.getDefaultToolkit().sync();
     }
-    
+
 }

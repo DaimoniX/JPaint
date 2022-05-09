@@ -17,7 +17,6 @@ public class Controls extends JPanel {
 
     public Controls(PaintArea paintArea) {
         this.paintArea = paintArea;
-
         JFileChooser fileChooser = new JFileChooser(new File("."));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg");
         fileChooser.setFileFilter(filter);
@@ -56,7 +55,7 @@ public class Controls extends JPanel {
     }
 
     public void save(String path) throws IOException {
-        if(!path.matches(".*\\.jpg"))
+        if (!path.matches(".*\\.jpg"))
             path += ".jpg";
         var out = new FileOutputStream(new File(path));
         ImageIO.write(paintArea.getImage(), "jpeg", out);
